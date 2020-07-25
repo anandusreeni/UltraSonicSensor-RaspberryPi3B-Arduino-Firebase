@@ -78,14 +78,62 @@ After that let us check whether data is read serially. Use the following code to
 
 ```python
 import serial
-
+import time
 ser = serial.Serial('/dev/ttyACM0',9600)
 s = [0,1]
 while True:
     read_serial=ser.readline()
     print read_serial
+    time.sleep(1)
 ```    
+If we are getting the output then we are good to go.
+
+Let us Install Firebase libraries on our python 
+Open Command Line and load following:
+
+```bat
+$ sudo apt-get update
+$ sudo apt-get install python-pip python-dev ipython
+$ sudo pip install google-cloud-storage
+$ sudo pip install firebase
+$ sudo pip install python-firebase
+```
+Now open up a firebase account and create a real time database
+
+  - Create a free firebase account with your gmail id
+  - Go To Console
+  - Click on Add Project > Enter Your project Name> Click on Continue
+  - If you want you can enable Google analytics
+  - Click on Add firebase account
+  - Click on database on Develop console in left side of the Screen. 
+  - Click on create database 
+    You can opt any of the two opions:
     
+     **Production Mode**: Data will be private in default. We have to provide certain credentials for updating values to the database
+     
+     **Test Mode**:It is a public mode of data acceptance. It will be accepting datas without any security rules. Recommended only on hobby projects.
+     
+  - Lets proceed with test mode. Select real time database which wont have data storage capability. 
+  - Open data in the screen and copy the URL like this **projectName.firebaseio.com/**
+  - Paste this to following code in pi and execute it.
+  
+  ```python 
+  import serial
+  from firebase import firebase
+
+  url = 'PASTE your Custom URL HERE'   # The copied url from firebase have to place here
+  firebase = firebase.FirebaseApplication(url)   
+  SerialValue = serial.Serial('/dev/ttyACM0',9600)
+  s = [0,1]
+  while True:
+      readValue=SerialValue.readline()
+      print readValue
+      result = firebase.put("/Test Val","Value",readValue) # Sending the real time value, Test Val is just a parameter name. You can update it as you like
+  ```    
+  
+Go back to data tab in firebase you can see Ultra sonic value is updated in real time manner
+  
+![Image of Circuit](https://raw.githubusercontent.com/anandusreeni/UltraSonicSensor-RaspberryPi3B-Arduino-Firebase/master/Output.jpg)
 
 
 
