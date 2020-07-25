@@ -1,5 +1,5 @@
 # UltraSonicSensor-RaspberryPi3B-Arduino-Firebase
-Here we are showing and Ultra sonic sensor value is read using arduino and transferred to Pi using serial communication. This shared value is sent to firebase using Pi. 
+Here we are reading Ultra sonic sensor value with the help of arduino and transferred to Pi using serial communication. This shared value is sent to firebase using Pi. 
 
 ## Components Used
 
@@ -63,12 +63,12 @@ long calcDistance(long duration) {
 
 The Raspberry Pi is a low cost, credit-card sized computer that plugs into a computer monitor or TV, and uses a standard keyboard and mouse. It is a capable little device that enables people of all ages to explore computing, and to learn how to program in languages like Scratch and Python. It’s capable of doing everything you’d expect a desktop computer to do, from browsing the internet and playing high-definition video, to making spreadsheets, word-processing, and playing games.
 
-Letus Connect Arduino to the USB PORT of Raspberry Pi 3B using USB Cable
+Let us Connect Arduino to the USB PORT of Raspberry Pi 3B using USB Cable
 
-In Pi UART will be off by default. We have to enable **UART for serial communication**. You can use the following link for enabling serial communication on pi
+In Pi, UART will be off by default. We have to enable **UART for serial communication**. You can use the following link for enabling serial communication on Pi
 https://learn.adafruit.com/adafruits-raspberry-pi-lesson-5-using-a-console-cable/enabling-serial-console
 
-Then open command line and install **PySerial**
+Then open command prompt and install **PySerial**
 
 ```bat
 pip install pyserial
@@ -88,8 +88,8 @@ while True:
 ```    
 If we are getting the output then we are good to go.
 
-Let us Install Firebase libraries on our python 
-Open Command Line and load following:
+Let us Install Firebase and dependencies in our Raspberry Pi 3b 
+Open Command prompt and  execute following commands:
 
 ```bat
 $ sudo apt-get update
@@ -105,17 +105,17 @@ Now open up a firebase account and create a real time database
   - Click on Add Project > Enter Your project Name> Click on Continue
   - If you want you can enable Google analytics
   - Click on Add firebase account
-  - Click on database on Develop console in left side of the Screen. 
-  - Click on create database 
-    You can opt any of the two opions:
+  - Click on database in Develop console on left side of the Screen. 
+  - Click on create database.
+    You can opt any of the two options:
     
-     **Production Mode**: Data will be private in default. We have to provide certain credentials for updating values to the database
+     **Production Mode**: Data will be private in default. We have to provide certain credentials for updating values into the database
      
      **Test Mode**:It is a public mode of data acceptance. It will be accepting datas without any security rules. Recommended only on hobby projects.
      
-  - Lets proceed with test mode. Select real time database which wont have data storage capability. 
+  - Let`s proceed with test mode. Select real time database which willn`t have data storage capability. 
   - Open data in the screen and copy the URL like this **projectName.firebaseio.com/**
-  - Paste this to following code in pi and execute it.
+  - Paste this to following code in Pi and execute it.
   
   ```python 
   import serial
